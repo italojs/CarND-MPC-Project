@@ -60,7 +60,7 @@ The code compiles without errors or warnings. No modifications were done on the 
 
 ### The Model
 
-Kinematic model:
+The Kinematic model handdle a complex interactions between the tires and the road.
 
 ``` c++
 x[t] = x[t-1] + v[t-1] * cos(psi[t-1]) * dt
@@ -70,8 +70,28 @@ v[t] = v[t-1] + a[t-1] * dt
 cte[t] = f(x[t-1]) - y[t-1] + v[t-1] * sin(epsi[t-1]) * dt
 epsi[t] = psi[t] - psides[t-1] + v[t-1] * delta[t-1] / Lf * dt
 ```
+This values has the model's state.
 
-The objective is to find the steering angle(`delta`) and the acceleration (`a`) in the way it will minimize an objective function that is the combination of different factors:
+Subtitles:
+
+x, y : Car's position.
+psi : Car's heading direction.
+delta: 
+dt: time interval
+delta : Steering angle.
+Lf: distance between the car of mass and the front wheels
+v : Car's velocity.
+cte : Cross-track error.
+epsi : Orientation error.
+a : Car's acceleration (throttle).
+
+We need to find the `a` value(acceleration) and the `delta` value(steering angle) to minimize an function that is the combination of tree different guys:
+
+1 - Square sum of cte and epsi;
+2 - Square sum of the difference actuators;
+3 - Square sum of the difference between two consecutive actuator values;
+
+How these factors had be tuned?
 
 ### Timestep Length and Elapsed Duration (N & dt)
 
